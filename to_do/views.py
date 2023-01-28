@@ -1,4 +1,5 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView
+from django.urls import reverse
 from .models import ToDoList, Task
 
 class ToDoListOverview(ListView):
@@ -13,3 +14,14 @@ class TaskListView(ListView):
             context = super().get_context_data()
             context["todo_list"] = ToDoList.objects.get(id=self.kwargs["list_id"])
             return context
+
+class TaskCreateView(CreateView):
+    model = Task
+    fields = ["todo_list", "title", "description", "due_date",]
+
+    def get_success_url(self):
+        return reverse("list", args=[self.object.todo_list_id])
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = ["todo_list", "title", "description", "due_date",]

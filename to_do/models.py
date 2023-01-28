@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.db import models
+from django.urls import reverse
 
 
 class ToDoList(models.Model):
@@ -18,3 +19,8 @@ class Task(models.Model):
 
     def __str__(self):
         return f"{self.title} due on {self.due_date}"
+
+    def get_absolute_url(self):
+        return reverse(
+            "edit-task", args=[str(self.todo_list.id), str(self.id)]
+    )
