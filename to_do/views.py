@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from .models import ToDoList, Task
 
@@ -25,3 +25,9 @@ class TaskCreateView(CreateView):
 class TaskUpdateView(UpdateView):
     model = Task
     fields = ["todo_list", "title", "description", "due_date",]
+
+class TaskDeleteView(DeleteView):
+    model = Task
+
+    def get_success_url(self):
+        return reverse_lazy("list", args=[self.kwargs["list_id"]])
