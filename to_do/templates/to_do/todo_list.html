@@ -12,7 +12,7 @@
                 <div>
                     <div
                         role="button"
-                        onclick="location.href='#'">
+                        onclick="location.href='{% url "edit-task" todo_list.id task.id %}'">
                         {{ task.title }}
                         (Due {{ task.due_date }})
                     </div>
