@@ -6,6 +6,14 @@ class ToDoListOverview(ListView):
     model = ToDoList
     template_name = "to_do/index.html"
 
+class ToDoListCreateView(CreateView):
+    model = ToDoList
+    fields = ["title"]
+
+class ToDoListUpdateView(UpdateView):
+    model = ToDoList
+    fields = ["title"]
+
 class TaskListView(ListView):
     model = Task
     template_name = "to_do/todo_list.html"
@@ -18,6 +26,12 @@ class TaskListView(ListView):
 class TaskCreateView(CreateView):
     model = Task
     fields = ["todo_list", "title", "description", "due_date",]
+
+    def get_context_data(self):
+        context = super(TaskCreateView, self).get_context_data()
+        todo_list = ToDoList.objects.get(id=self.kwargs["list_id"])
+        context["todo_list"] = todo_list
+        return context
 
     def get_success_url(self):
         return reverse("list", args=[self.object.todo_list_id])

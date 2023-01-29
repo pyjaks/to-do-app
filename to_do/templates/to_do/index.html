@@ -15,4 +15,8 @@
     <h4>There are no lists to display.</h4>
     {% endfor %}
 </ul>
+    <input
+        value="Create a new list"
+        type="button"
+        onclick="location.href='{% url "new-list" %}'"/>
 {% endblock %}
