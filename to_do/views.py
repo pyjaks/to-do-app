@@ -40,6 +40,12 @@ class TaskUpdateView(UpdateView):
     model = Task
     fields = ["todo_list", "title", "description", "due_date",]
 
+    def get_context_data(self):
+        context = super(TaskUpdateView, self).get_context_data()
+        context["todo_list"] = self.object.todo_list
+        context["title"] = "Edit task"
+        return context
+
 class TaskDeleteView(DeleteView):
     model = Task
 
