@@ -1,11 +1,14 @@
 # to-do-app
 
-This project uses Poetry to manage packages. To run the server:
+## Development
 
-```poetry run python manage.py runserver``` 
+This project uses Poetry to manage packages. In the root of this project run:
+```
+poetry install
+poetry run python manage.py makemigrations
+poetry run python manage.py migrate
+```
 
-### Future work
-- Priority tags
-- Pomodoro timer to help you complete your tasks
-- Sub tasks?
-- Comments?
+To run the server:
+
+`poetry run python manage.py runserver` 
